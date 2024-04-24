@@ -22,10 +22,7 @@ public class IsMine : MonoBehaviour
       }
       else
       {
-         _controller.enabled = false;
-         _inventory.enabled = false;
          _CameraController.SetActive(false);
-         gameObject.SetActive(false); 
       }
    }
 }
