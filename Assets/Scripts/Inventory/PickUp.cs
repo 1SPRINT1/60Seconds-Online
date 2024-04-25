@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+public class PickUp : MonoBehaviourPunCallbacks 
 {
     [SerializeField] private Inventory inventory;
     [SerializeField] private GameObject slotButton;
@@ -33,7 +32,8 @@ public class PickUp : MonoBehaviour
                         Instantiate(slotButton, inventory.slots[i].transform);
                         inventory.buttonActive = false;
                         inventory.activator = false;
-                        Destroy(gameObject);
+                        photonView.RequestOwnership();
+                        PhotonNetwork.Destroy(photonView);
 
 
                         break;
@@ -43,8 +43,6 @@ public class PickUp : MonoBehaviour
             }
         }
     }
-
-    
     private void OnTriggerExit(Collider other)
     {
         inventory.buttonActive = false;
